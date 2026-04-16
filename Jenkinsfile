@@ -33,7 +33,12 @@ pipeline {
                sh 'ansible-playbook playbook.yml -i hosts.ini'
             }
         }
-
+stage('Test Network') {
+    steps {
+        sh 'ping -c 3 github.com'
+        sh 'curl https://github.com'
+    }
+}
                   
     }
 
