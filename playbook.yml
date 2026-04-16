@@ -1,0 +1,15 @@
+---
+- name: Deploy to Tomcat
+  hosts: web
+  become: yes
+  tasks:
+    - name: Copy WAR file to Tomcat
+      copy:
+        src: "/var/snap/jenkins/5004/workspace/2023MvenWebAppPipelineWithAnsible/target/2023MvenWebAppPipelineWithAnsible.war"
+        dest: "/opt/tomcat/webapps/2023MvenWebAppPipelineWithAnsible.war"
+        remote_src: no
+
+    - name: Restart Tomcat
+      systemd:
+        name: tomcat
+        state: restarted
